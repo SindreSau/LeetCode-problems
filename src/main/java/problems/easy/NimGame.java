@@ -1,5 +1,8 @@
 package problems.easy;
 
+/**
+ * Solution to problem 293. Nim Game
+ * */
 public class NimGame {
 
     public static void main(String[] args) {
