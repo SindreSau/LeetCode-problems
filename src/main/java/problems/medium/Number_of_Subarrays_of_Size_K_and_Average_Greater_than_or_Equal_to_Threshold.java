@@ -29,6 +29,8 @@ public class Number_of_Subarrays_of_Size_K_and_Average_Greater_than_or_Equal_to_
     0 <= threshold <= 104
     */
 
+    /*
+    // MY SLIDING WINDOWS SOLUTION: 4ms, 53.7mb
     public static int numOfSubarrays(int[] arr, int k, int threshold) {
         int[] subSum = new int[arr.length - k + 1];
         for (int i = 0; i < subSum.length; i++) {
@@ -51,6 +53,37 @@ public class Number_of_Subarrays_of_Size_K_and_Average_Greater_than_or_Equal_to_
 
         System.out.println(Arrays.toString(subSum));
         return count;
+    }
+    */
+
+    /**
+     * Solution based on leetcode submissions
+     * */
+    public static int numOfSubarrays(int[] arr, int k, int threshold) {
+        int n = arr.length;
+        int i = 0;
+
+        // Initially s will be sum of arr[0:k]
+        int s = 0;
+        for (int id=0; id<k; id++){
+            s += arr[id];
+        }
+        int avg = s / k;
+
+        // Total no of required subarrays
+        int res = 0;
+
+        while (true){
+            // If current avg satisfies the condition
+            if (avg >= threshold) res += 1;
+            i ++;
+            if (i+k-1>n-1) break;
+
+            // Remove the starting value and add one more value
+            s = s - arr[i-1] + arr[i+k-1];
+            avg = s/k;
+        }
+        return res;
     }
 }
 
